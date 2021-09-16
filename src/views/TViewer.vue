@@ -12,7 +12,7 @@ import Viewer from "@toast-ui/editor/dist/toastui-editor-viewer";
 import {MdNode, PluginInfo} from "@toast-ui/editor";
 import {popupPlugin} from "@/toustuiplugin/popupPlugin";
 import {innerLinkPlugin} from "@/toustuiplugin/innerLinkPlugin";
-
+import '@/components/common.css'
 
 export default Vue.extend({
 
