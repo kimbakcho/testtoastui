@@ -9,121 +9,26 @@ import Vue from 'vue';
 import Editor, {HTMLMdNode, MdNode, PluginContext, PluginInfo} from '@toast-ui/editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import './common.css'
+import {popupPlugin} from "@/toustuiplugin/popupPlugin";
+import {innerLinkPlugin} from "@/toustuiplugin/innerLinkPlugin";
 export default Vue.extend({
   name: 'HelloWorld',
   props: {
     msg: String,
   },
   mounted() {
-
+    let pluginOption = {
+      context: this
+    }
     const editor = new Editor({
       el: document.querySelector('#editor') as any,
       height: '500px',
       initialEditType: 'markdown',
       previewStyle: 'vertical',
-      plugins: [this.popupPlugin,this.innerLinkPlugin],
-    });
+      plugins: [[popupPlugin,pluginOption],[innerLinkPlugin,pluginOption]],
+    })
   },
-  methods: {
-    popupClick(title: string,value: string){
-      this.$swal.fire({
-        title: title,
-        text: value,
-      })
-    },
-    innerLinkClick(linkUrl: string) {
-      this.$router.push({
-        path: "/linkBoard",
-        query: {
-          linkUrl: linkUrl
-        }
-      })
-    },
-    popupPlugin(): PluginInfo {
-      // eslint-disable-next-line @typescript-eslint/no-this-alias
-      let _this = this;
-      return {
-        toHTMLRenderers: {
-          popup(node: MdNode) {
-            let text = ""
-            let title = ""
-            let content = ""
 
-            setTimeout(() => {
-              let querySelector = document.querySelectorAll(".popupBox");
-              querySelector.forEach(elem =>{
-
-                elem.addEventListener('click',evt => {
-                  _this.popupClick(title,content)
-                });
-              })
-            });
-            let split = node.literal!.split("\n");
-
-            split.forEach(x=>{
-              if(x.length> 0 ){
-                let values = x.split("=");
-                let key = values[0];
-                let value = values[1];
-                if(key == "text"){
-                  text = value
-                }else if(key == "title"){
-                  title = value
-                }else if(key == "content"){
-                  content = value
-                }
-              }
-            })
-            return [
-              {type: 'openTag', tagName: 'span', outerNewLine: true, classNames: ['popupBox']},
-              {type: 'html', content: `<span class="popup"> ${text} </span>`},
-              {type: 'closeTag', tagName: 'span', outerNewLine: true}
-            ]
-          }
-        },
-      }
-    },
-    innerLinkPlugin(): PluginInfo {
-      let _this = this;
-      return {
-        toHTMLRenderers: {
-          innerLink(node: MdNode) {
-            let text = ""
-            let link = ""
-
-            setTimeout(() => {
-              let querySelector = document.querySelectorAll(".innerLinkBox");
-              querySelector.forEach(elem =>{
-
-                elem.addEventListener('click',evt => {
-                  _this.innerLinkClick(link)
-                });
-              })
-            });
-            let split = node.literal!.split("\n");
-
-            split.forEach(x=>{
-              if(x.length> 0 ){
-                let values = x.split("=");
-                let key = values[0];
-                let value = values[1];
-                if(key == "text"){
-                  text = value
-                }else if(key == "link"){
-                  link = value
-                }
-              }
-            })
-            return [
-              {type: 'openTag', tagName: 'span', classNames: ['innerLinkBox']},
-              {type: 'html', content: `<span class="innerLink"> ${text} </span>`},
-              {type: 'closeTag', tagName: 'span' }
-            ]
-          }
-        },
-      }
-    }
-  }
 });
 </script>
 <style>
