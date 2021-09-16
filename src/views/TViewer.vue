@@ -1,28 +1,42 @@
 <template>
-  <div class="hello">
-    <div id="editor"></div>
+  <div>
+    <div id="viewer">
+
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Editor, {HTMLMdNode, MdNode, PluginContext, PluginInfo} from '@toast-ui/editor';
-import '@toast-ui/editor/dist/toastui-editor.css';
-import './common.css'
-export default Vue.extend({
-  name: 'HelloWorld',
-  props: {
-    msg: String,
-  },
-  mounted() {
+import Vue from "vue"
+import Viewer from "@toast-ui/editor/dist/toastui-editor-viewer";
+import {MdNode, PluginInfo} from "@toast-ui/editor";
 
-    const editor = new Editor({
-      el: document.querySelector('#editor') as any,
-      height: '500px',
-      initialEditType: 'markdown',
-      previewStyle: 'vertical',
+
+export default Vue.extend({
+
+  mounted() {
+    const viewer = new Viewer({
+      el: document.querySelector('#viewer') as any,
       plugins: [this.popupPlugin,this.innerLinkPlugin],
+      initialValue: "$$popup\n" +
+          "text=팝업\n" +
+          "title=타이틀\n" +
+          "content=팝업 내용\n" +
+          "$$\n" +
+          "테스트 내용\n" +
+          "\n" +
+          "테스트 내용 \n" +
+          "$$space\n" +
+          "$$\n" +
+          "$$innerLink\n" +
+          "text=innerLinkTest\n" +
+          "link=https://triple.guide/\n" +
+          "$$\n" +
+          "\n" +
+          "Inner Link",
+
     });
+
   },
   methods: {
     popupClick(title: string,value: string){
@@ -40,7 +54,6 @@ export default Vue.extend({
       })
     },
     popupPlugin(): PluginInfo {
-      // eslint-disable-next-line @typescript-eslint/no-this-alias
       let _this = this;
       return {
         toHTMLRenderers: {
@@ -75,9 +88,9 @@ export default Vue.extend({
               }
             })
             return [
-              {type: 'openTag', tagName: 'span', outerNewLine: true, classNames: ['popupBox']},
-              {type: 'html', content: `<span class="popup"> ${text} </span>`},
-              {type: 'closeTag', tagName: 'span', outerNewLine: true}
+              {type: 'openTag', tagName: 'div', outerNewLine: true, classNames: ['popupBox']},
+              {type: 'html', content: `<div class="popup"> ${text} </div>`},
+              {type: 'closeTag', tagName: 'div', outerNewLine: true}
             ]
           }
         },
@@ -115,17 +128,19 @@ export default Vue.extend({
               }
             })
             return [
-              {type: 'openTag', tagName: 'span', classNames: ['innerLinkBox']},
-              {type: 'html', content: `<span class="innerLink"> ${text} </span>`},
-              {type: 'closeTag', tagName: 'span' }
+              {type: 'openTag', tagName: 'div', outerNewLine: true, classNames: ['innerLinkBox']},
+              {type: 'html', content: `<div class="innerLink"> ${text} </div>`},
+              {type: 'closeTag', tagName: 'div', outerNewLine: true}
             ]
           }
         },
       }
     }
   }
-});
+
+})
 </script>
-<style>
+
+<style scoped>
 
 </style>
