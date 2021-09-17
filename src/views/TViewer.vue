@@ -13,7 +13,12 @@ import {MdNode, PluginInfo} from "@toast-ui/editor";
 import {popupPlugin} from "@/toustuiplugin/popupPlugin";
 import {innerLinkPlugin} from "@/toustuiplugin/innerLinkPlugin";
 import '@/components/common.css'
+import 'tui-color-picker/dist/tui-color-picker.css';
+import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
+import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
+import '@toast-ui/editor-plugin-table-merged-cell/dist/toastui-editor-plugin-table-merged-cell.css';
 
+import tableMergedCell from '@toast-ui/editor-plugin-table-merged-cell';
 export default Vue.extend({
 
   mounted() {
@@ -22,7 +27,7 @@ export default Vue.extend({
     }
     const viewer = new Viewer({
       el: document.querySelector('#viewer') as any,
-      plugins: [[popupPlugin,pluginOption],[innerLinkPlugin,pluginOption]],
+      plugins: [[popupPlugin,pluginOption],[innerLinkPlugin,pluginOption],colorSyntax,tableMergedCell],
       initialValue: "$$popup\n" +
           "text=팝업\n" +
           "title=타이틀\n" +

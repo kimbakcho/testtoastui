@@ -18,9 +18,7 @@ export function popupPlugin (context: PluginContext,options: any ): PluginInfo{
                 setTimeout(() => {
                     const querySelector: NodeListOf<HTMLDivElement> = document.querySelectorAll(".popupBox");
                     querySelector.forEach(elem =>{
-
                         elem.addEventListener('click',evt => {
-                            console.log(_this)
                             popupClick(title,content)
                         });
                     })
