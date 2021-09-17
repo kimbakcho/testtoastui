@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Editor, {HTMLMdNode, MdNode, PluginContext, PluginInfo} from '@toast-ui/editor';
+import Editor, {EditorCore, HTMLMdNode, MdNode, PluginContext, PluginInfo} from '@toast-ui/editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import './common.css'
 import {popupPlugin} from "@/toustuiplugin/popupPlugin";
@@ -32,7 +32,7 @@ export default Vue.extend({
   },
   data(){
     return {
-      editor: {} as Editor
+      editor: {} as EditorCore
     }
   },
   mounted() {

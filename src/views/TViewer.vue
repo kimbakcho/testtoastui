@@ -18,7 +18,7 @@ import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import '@toast-ui/editor-plugin-table-merged-cell/dist/toastui-editor-plugin-table-merged-cell.css';
 
-import tableMergedCell from '@toast-ui/editor-plugin-table-merged-cell';
+
 export default Vue.extend({
 
   mounted() {
@@ -27,7 +27,7 @@ export default Vue.extend({
     }
     const viewer = new Viewer({
       el: document.querySelector('#viewer') as any,
-      plugins: [[popupPlugin,pluginOption],[innerLinkPlugin,pluginOption],colorSyntax,tableMergedCell],
+      plugins: [[popupPlugin,pluginOption],[innerLinkPlugin,pluginOption]],
       initialValue: "$$popup\n" +
           "text=팝업\n" +
           "title=타이틀\n" +
@@ -40,7 +40,7 @@ export default Vue.extend({
           "$$\n" +
           "$$innerLink\n" +
           "text=innerLinkTest\n" +
-          "link=https://triple.guide/\n" +
+          "link=https://ui.toast.com/tui-editor\n" +
           "$$\n" +
           "\n" +
           "Inner Link",
