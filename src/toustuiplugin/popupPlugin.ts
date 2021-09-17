@@ -3,9 +3,11 @@ import {MdNode, PluginContext, PluginInfo} from "@toast-ui/editor";
 export function popupPlugin (context: PluginContext,options: any ): PluginInfo{
     const _this = options.context;
     function popupClick(title: string,value: string){
+        console.log(value)
         _this.$swal.fire({
             title: title,
-            text: value,
+            // text: value,
+            html: value
         })
     }
     return {
@@ -27,7 +29,7 @@ export function popupPlugin (context: PluginContext,options: any ): PluginInfo{
 
                 split.forEach(x=>{
                     if(x.length> 0 ){
-                        const values = x.split("=");
+                        const values = x.split("$");
                         const key = values[0];
                         const value = values[1];
                         if(key == "text"){

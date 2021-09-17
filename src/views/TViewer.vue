@@ -29,9 +29,9 @@ export default Vue.extend({
       el: document.querySelector('#viewer') as any,
       plugins: [[popupPlugin,pluginOption],[innerLinkPlugin,pluginOption]],
       initialValue: "$$popup\n" +
-          "text=팝업\n" +
-          "title=타이틀\n" +
-          "content=팝업 내용\n" +
+          "text$팝업\n" +
+          "title$타이틀\n" +
+          "content$ <div style=\"font-size:46px\"> ttt</div> \n" +
           "$$\n" +
           "테스트 내용\n" +
           "\n" +
@@ -39,8 +39,8 @@ export default Vue.extend({
           "$$space\n" +
           "$$\n" +
           "$$innerLink\n" +
-          "text=innerLinkTest\n" +
-          "link=https://ui.toast.com/tui-editor\n" +
+          "text$innerLinkTest\n" +
+          "link$https://ui.toast.com/tui-editor\n" +
           "$$\n" +
           "\n" +
           "Inner Link",

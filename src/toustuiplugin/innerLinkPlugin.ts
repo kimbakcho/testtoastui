@@ -29,7 +29,7 @@ export function innerLinkPlugin(context: PluginContext,options: any): PluginInfo
 
                 split.forEach(x=>{
                     if(x.length> 0 ){
-                        const values = x.split("=");
+                        const values = x.split("$");
                         const key = values[0];
                         const value = values[1];
                         if(key == "text"){
