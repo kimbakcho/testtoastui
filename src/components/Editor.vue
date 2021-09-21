@@ -57,6 +57,8 @@ export default Vue.extend({
           let formData = new FormData();
           formData.append("file", blob);
 
+
+
           //BackEnd 와 통신 하여 Url 받아 올때 코드
           // const { data } = axios.post(`${backUrl}/image`,{header: { "content-type": "multipart/formdata" }})
           // callback(data.url,"alt text")
